@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="user-page (isActive)" class="tab-pane" th:classappend="${isActive} ? 'active' : ''" id="userArea"
+     role="tabpanel" aria-labelledby="userAreaTab">
+    <h1>User information-page</h1>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="navUsersTable" role="tabpanel">
+            <nav class="navbar navbar-default bg-light mr-0 ml-0 border">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <a class="navbar-brand disables text-dark text-style-bold">About user</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="m-4">
+                <table class="table table-striped border">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:utext="${user.id}"></td>
+                        <td th:utext="${user.name}"></td>
+                        <td th:utext="${user.surname}"></td>
+                        <td th:utext="${user.email}"></td>
+                        <td>
+                            <div th:each="role: ${user.getRoles()}">
+                                <span th:if="(${role.getRole()} == 'ROLE_ADMIN')" th:utext="ADMIN"></span>
+                                <span th:if="(${role.getRole()} == 'ROLE_USER')" th:utext="USER"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
